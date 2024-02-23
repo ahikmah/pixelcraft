@@ -169,13 +169,12 @@ const TransformationForm = ({
       setNewTransformation((prev: any) => ({
         ...prev,
         [type]: {
-          ...prev[type],
+          ...prev?.[type],
           [fieldName === "prompt" ? "prompt" : "to"]: value,
         },
       }));
-
-      return onChangeField(value);
-    }, 1000);
+    }, 1000)();
+    return onChangeField(value);
   };
 
   const onTransformationHandler = async () => {
@@ -219,6 +218,7 @@ const TransformationForm = ({
                 onValueChange={(value) =>
                   onSelectFieldHandler(value, field.onChange)
                 }
+                value={field.value}
               >
                 <SelectTrigger className="select-field">
                   <SelectValue placeholder="Select Size" />
